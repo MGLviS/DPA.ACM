@@ -1,4 +1,6 @@
+using DPA.ACM.DOMAIN.Core.Interfaces;
 using DPA.ACM.DOMAIN.Infrastructure.Data;
+using DPA.ACM.DOMAIN.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,11 @@ builder.Services.AddDbContext<AutoCareManagerContext>(options =>
 {
 options.UseSqlServer(_cnx);
 });
+
+//Inventario
+builder
+    .Services
+    .AddTransient<IInventarioRepository, InventarioRepository>();
 
 
 builder.Services.AddControllers();
