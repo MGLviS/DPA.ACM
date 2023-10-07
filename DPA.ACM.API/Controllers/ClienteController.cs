@@ -36,5 +36,12 @@ namespace DPA.ACM.API.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var cliente = await _ClienteRepository.GetAll();
+            return Ok(cliente);
+        }
     }
 }
