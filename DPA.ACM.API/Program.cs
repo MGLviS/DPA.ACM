@@ -18,6 +18,11 @@ builder
     .Services.
     AddTransient<IPropietarioRepository, PropietarioRepository>();
 
+//Gestion Taller
+builder
+    .Services.
+    AddTransient<ITallerRepository, TallerRepository>();
+
 //Inventario Repuestos
 builder
     .Services
