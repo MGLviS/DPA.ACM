@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DPA.ACM.DOMAIN.Core.Interfaces;
 
 namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
 {
-    public class ClienteRepository
+    public class ClienteRepository : IClienteRepository
     {
         private readonly AutoCareManagerContext _dbContext;
 
