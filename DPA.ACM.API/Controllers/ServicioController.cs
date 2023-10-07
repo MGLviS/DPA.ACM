@@ -23,7 +23,7 @@ namespace DPA.ACM.API.Controllers
             return Ok(servicios);
         }
 
-        [HttpGet("BuscarServicios")]
+        [HttpGet("BuscarServicios/{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var servicio = await _servicioRepository.GetById(id);

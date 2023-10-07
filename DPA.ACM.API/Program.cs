@@ -44,6 +44,13 @@ builder
     .Services
     .AddTransient<IServicioRepository, ServicioRepository>();
 
+
+//Gestion Vehiculo
+builder
+    .Services
+    .AddTransient<IVehiculoRepository, VehiculoRepository>();
+
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
