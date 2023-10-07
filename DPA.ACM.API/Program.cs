@@ -13,7 +13,7 @@ builder.Services.AddDbContext<AutoCareManagerContext>(options =>
 options.UseSqlServer(_cnx);
 });
 
-//Inventario
+//Inventario Repuestos
 builder
     .Services
     .AddTransient<IInventarioRepository, InventarioRepository>();
