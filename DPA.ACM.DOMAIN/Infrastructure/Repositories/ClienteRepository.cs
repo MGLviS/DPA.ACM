@@ -41,6 +41,10 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             return rows > 0;
 
         }
+        public async Task<IEnumerable<Cliente>> GetAll()
+        {
+            return await _dbContext.Cliente.ToListAsync();
+        }
 
     }
 }

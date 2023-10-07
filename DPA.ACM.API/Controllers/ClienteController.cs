@@ -27,7 +27,7 @@ namespace DPA.ACM.API.Controllers
         }
 
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("Eliminar por ID")]
         public async Task<IActionResult> Eliminar(int id)
         {
             var result = await _ClienteRepository.Eliminar(id);
@@ -35,6 +35,13 @@ namespace DPA.ACM.API.Controllers
                 return BadRequest(result);
 
             return Ok(result);
+        }
+
+        [HttpGet("Listar todos los Clientes")]
+        public async Task<IActionResult> GetAll()
+        {
+            var cliente = await _ClienteRepository.GetAll();
+            return Ok(cliente);
         }
     }
 }
