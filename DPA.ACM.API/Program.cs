@@ -13,6 +13,11 @@ builder.Services.AddDbContext<AutoCareManagerContext>(options =>
 options.UseSqlServer(_cnx);
 });
 
+//Gestion Propietario
+builder
+    .Services.
+    AddTransient<IPropietarioRepository, PropietarioRepository>();
+
 //Inventario Repuestos
 builder
     .Services
