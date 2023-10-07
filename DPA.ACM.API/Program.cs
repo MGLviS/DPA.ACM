@@ -18,6 +18,11 @@ builder
     .Services
     .AddTransient<IInventarioRepository, InventarioRepository>();
 
+//Gestion Cliente
+builder
+    .Services
+    .AddTransient<IClienteRepository, ClienteRepository>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
