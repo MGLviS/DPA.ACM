@@ -23,5 +23,33 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
         {
             return await _dbContext.Inventario.ToListAsync();
         }
+
+        public async Task<bool> Insert(Inventario inventario)
+        {
+            await _dbContext.Inventario.AddAsync(inventario);
+            int rows = await _dbContext.SaveChangesAsync();
+            return rows > 0;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var inventario = await _dbContext
+                .Inventario
+                .Where(x => x.InventarioId == id).FirstOrDefaultAsync();
+
+            if(inventario == null) 
+                return false;
+
+            _dbContext.Inventario.Remove(inventario);
+            var rows = await _dbContext.SaveChangesAsync();
+            return rows > 0;
+        }
+
+        public async Task<Inventario> GetByName (string nrepuesto)
+        {
+            return await _dbContext
+                .Inventario
+                .Where(x => x.Nombre == nrepuesto).FirstOrDefaultAsync();
+        }
     }
 }

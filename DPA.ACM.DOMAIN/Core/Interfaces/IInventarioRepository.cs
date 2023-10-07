@@ -5,5 +5,8 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
     public interface IInventarioRepository
     {
         Task<IEnumerable<Inventario>> GetAll();
+        Task<bool> Insert(Inventario inventario);
+        Task<bool> Delete(int id);
+        Task<Inventario> GetByName(string nrepuesto);
     }
 }

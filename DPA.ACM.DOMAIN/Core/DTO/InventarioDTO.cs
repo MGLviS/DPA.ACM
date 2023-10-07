@@ -6,7 +6,55 @@ using System.Threading.Tasks;
 
 namespace DPA.ACM.DOMAIN.Core.DTO
 {
-    internal class InventarioDTO
+    public class InventarioDTO
     {
+        public int InventarioId { get; set; }
+
+        public string? Nombre { get; set; }
+
+        public string? Descripcion { get; set; }
+
+        public string? VehiculoCompatible { get; set; }
+
+        public int? CantidadStock { get; set; }
+
+        public decimal? PrecioUnitario { get; set; }
+    }
+
+    public class InventarioInsertarDTO
+    {
+
+        public string? Nombre { get; set; }
+
+        public string? Descripcion { get; set; }
+
+        public string? VehiculoCompatible { get; set; }
+
+        public int? CantidadStock { get; set; }
+
+        public decimal? PrecioUnitario { get; set; }
+    }
+
+    public class InventarioResponseDTO
+    {
+        public int InventarioId { get; set; }
+
+        public string? Nombre { get; set; }
+
+        public string? Descripcion { get; set; }
+
+        public string? VehiculoCompatible { get; set; }
+
+        public int? CantidadStock { get; set; }
+
+        public decimal? PrecioUnitario { get; set; }
+    }
+
+    public class InventarioActualizarDTO
+    {
+
+        public int? CantidadStock { get; set; }
+
+        public decimal? PrecioUnitario { get; set; }
     }
 }
