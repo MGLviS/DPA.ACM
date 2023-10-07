@@ -23,6 +23,12 @@ builder
     .Services.
     AddTransient<ITallerRepository, TallerRepository>();
 
+//Gestion Mecanico
+builder
+    .Services.
+    AddTransient<IMecanicoRepository, MecanicoRepository>();
+
+
 //Inventario Repuestos
 builder
     .Services
