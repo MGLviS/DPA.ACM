@@ -41,10 +41,36 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             return rows > 0;
 
         }
+        public async Task<bool> Actualizar(int id, Cliente cliente)
+        {
+
+            //verifica que el cliente que se intenta actualizar existe en la base de datos
+            var existCliente = await _dbContext.Cliente.FindAsync(id);
+            if (existCliente == null)
+            {
+                return false;
+            }
+
+            existCliente.Nombre = cliente.Nombre;
+            existCliente.Apellido = cliente.Apellido;
+            existCliente.CorreoElectronico = cliente.CorreoElectronico;
+            existCliente.Telefono = cliente.Telefono;
+            existCliente.Direccion = cliente.Direccion;
+            existCliente.Dni= cliente.Dni;
+            existCliente.Password = cliente.Password; 
+
+
+  
+                var rows=await _dbContext.SaveChangesAsync();
+                return rows > 0; ; // Actualización exitosa
+
+        }
         public async Task<IEnumerable<Cliente>> GetAll()
         {
             return await _dbContext.Cliente.ToListAsync();
         }
+
+
 
     }
 }

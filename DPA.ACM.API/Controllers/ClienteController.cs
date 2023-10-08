@@ -2,6 +2,7 @@
 using DPA.ACM.DOMAIN.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace DPA.ACM.API.Controllers
 {
@@ -43,5 +44,15 @@ namespace DPA.ACM.API.Controllers
             var cliente = await _ClienteRepository.GetAll();
             return Ok(cliente);
         }
+        [HttpPost("Actualizar")]
+        public async Task<IActionResult> Actualizar(int id, Cliente cliente)
+        {
+            var rows = await _ClienteRepository.Actualizar(id,  cliente);
+            return Ok(rows);
+        }
+
+
+
+
     }
 }
