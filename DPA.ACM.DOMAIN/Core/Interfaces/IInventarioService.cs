@@ -4,6 +4,7 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
 {
     public interface IInventarioService
     {
-        Task<InventarioResponseDTO> InventarioRespuesta(InventarioResponseDTO inventarioResponseDTO);
+        Task<IEnumerable<InventarioTablaDTO>> ShowTable();
+        Task<IEnumerable<InventarioTablaDTO>> GetByName(string name);
     }
 }

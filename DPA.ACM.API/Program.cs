@@ -1,4 +1,5 @@
 using DPA.ACM.DOMAIN.Core.Interfaces;
+using DPA.ACM.DOMAIN.Core.Services;
 using DPA.ACM.DOMAIN.Infrastructure.Data;
 using DPA.ACM.DOMAIN.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -30,9 +31,11 @@ builder
 
 
 //Inventario Repuestos
+
 builder
     .Services
     .AddTransient<IInventarioRepository, InventarioRepository>();
+builder.Services.AddTransient<IInventarioService, InventarioService>();
 
 //Gestion Cliente
 builder

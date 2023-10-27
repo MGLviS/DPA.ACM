@@ -45,11 +45,12 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             return rows > 0;
         }
 
-        public async Task<Inventario> GetByName (string nrepuesto)
+        public async Task<IEnumerable<Inventario>> GetByName (string nrepuesto)
         {
-            return await _dbContext
-                .Inventario
-                .Where(x => x.Nombre == nrepuesto).FirstOrDefaultAsync();
+         
+            var busqueda = await _dbContext.Inventario.Where(x => x.Nombre.Contains(nrepuesto)).ToListAsync();
+
+            return busqueda;
         }
     }
 }

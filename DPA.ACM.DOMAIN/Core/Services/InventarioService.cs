@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DPA.ACM.DOMAIN.Core.DTO;
+using DPA.ACM.DOMAIN.Core.Entities;
 using DPA.ACM.DOMAIN.Core.Interfaces;
 
 namespace DPA.ACM.DOMAIN.Core.Services
@@ -17,19 +18,45 @@ namespace DPA.ACM.DOMAIN.Core.Services
             _inventarioRepository = inventarioRepository;
         }
 
-        public async Task<InventarioResponseDTO> InventarioRespuesta(InventarioResponseDTO inventarioResponseDTO)
+
+        public async Task<IEnumerable<InventarioTablaDTO>> ShowTable()
         {
             var inventario = await _inventarioRepository.GetAll();
 
-            var inventarioDTO = new InventarioResponseDTO()
+            var tablaDTO = inventario.Select(item => new InventarioTablaDTO
             {
-                Nombre = inventarioResponseDTO.Nombre,
-                Descripcion = inventarioResponseDTO.Descripcion,
-                VehiculoCompatible = inventarioResponseDTO.VehiculoCompatible,
-                CantidadStock = inventarioResponseDTO.CantidadStock,
-                PrecioUnitario = inventarioResponseDTO.PrecioUnitario
-            };
-            return inventarioDTO;
+                InventarioId = item.InventarioId,
+                Nombre = item.Nombre,
+                Descripcion = item.Descripcion,
+                VehiculoCompatible = item.VehiculoCompatible,
+                CantidadStock = item.CantidadStock,
+                PrecioUnitario = item.PrecioUnitario,
+            }).ToList();
+                       
+            return tablaDTO;
         }
+
+        public async Task<IEnumerable<InventarioTablaDTO>> GetByName(string name)
+        {
+            var inventario = await _inventarioRepository.GetByName(name);
+
+            if (inventario == null)
+                return null;
+
+            var tablaDTO = inventario.Select(item => new InventarioTablaDTO
+            {
+                InventarioId = item.InventarioId,
+                Nombre = item.Nombre,
+                Descripcion = item.Descripcion,
+                VehiculoCompatible = item.VehiculoCompatible,
+                CantidadStock = item.CantidadStock,
+                PrecioUnitario = item.PrecioUnitario,
+            }).ToList();
+
+
+            return tablaDTO;
+        }
+
+
     }
 }

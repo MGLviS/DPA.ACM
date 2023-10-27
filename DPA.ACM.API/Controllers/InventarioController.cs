@@ -1,6 +1,7 @@
 ﻿using DPA.ACM.DOMAIN.Core.DTO;
 using DPA.ACM.DOMAIN.Core.Entities;
 using DPA.ACM.DOMAIN.Core.Interfaces;
+using DPA.ACM.DOMAIN.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,22 +11,29 @@ namespace DPA.ACM.API.Controllers
     [ApiController]
     public class InventarioController : ControllerBase
     {
-        private readonly IInventarioRepository _inventarioRepository;
-        //private readonly IInventarioService _inventarioService;
 
-        public InventarioController(IInventarioRepository inventarioRepository)
+        private readonly IInventarioService _inventarioService;
+        public InventarioController(IInventarioService inventarioService)
         {
-            _inventarioRepository = inventarioRepository;
+            _inventarioService = inventarioService;
         }
 
 
-
-        [HttpGet("ListarInventario")]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var inventario = await _inventarioRepository.GetAll();
+            var inventario = await _inventarioService.ShowTable();
             return Ok(inventario);
         }
+
+        [HttpGet("GetByName/{name}")]
+        public async Task<IActionResult> GetByName(string name)
+        {
+            var result = await _inventarioService.GetByName(name);
+            return Ok(result);
+        }
+
+        /*
 
         [HttpPost("GuardarInventario")]
         public async Task<ActionResult> InsertInventario(Inventario inventario)
@@ -36,12 +44,6 @@ namespace DPA.ACM.API.Controllers
             return Ok(result);
         }
 
-        [HttpGet("Buscar/{name}")]
-        public async Task<ActionResult> SearchInventario(string name)
-        {
-            var inventario = await _inventarioRepository.GetByName(name);
-            return Ok(inventario);
-        }
 
         [HttpDelete("EliminarInventario")]
         public async Task<ActionResult> DeleteInventario(int id)
@@ -50,7 +52,7 @@ namespace DPA.ACM.API.Controllers
             if (!result)
                 return BadRequest(result);
             return Ok(result);
-        }
+        }*/
 
     }
 }
