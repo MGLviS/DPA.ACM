@@ -17,7 +17,7 @@ namespace DPA.ACM.DOMAIN.Core.Services
         {
             _inventarioRepository = inventarioRepository;
         }
-
+        
 
         public async Task<IEnumerable<InventarioTablaDTO>> ShowTable()
         {
@@ -57,6 +57,48 @@ namespace DPA.ACM.DOMAIN.Core.Services
             return tablaDTO;
         }
 
+        public async Task<bool> RegistroInventario(CrearInventarioDTO inventarioDTO)
+        {
+            var inventario = new Inventario()
+            {
+                Nombre = inventarioDTO.Nombre,
+                Descripcion = inventarioDTO.Descripcion,
+                VehiculoCompatible = inventarioDTO.VehiculoCompatible,
+                CantidadStock = inventarioDTO.CantidadStock,
+                PrecioUnitario = inventarioDTO.PrecioUnitario
+            };
 
+            var result = await _inventarioRepository.Insert(inventario);
+            return result;
+        }
+
+        public async Task<bool> ActualizarInvetario(int id, ActualizarInventarioDTO inventarioDTO)
+        {
+            
+            var inventario = new Inventario()
+            {
+                InventarioId = id,
+                Nombre = inventarioDTO.Nombre,
+                Descripcion = inventarioDTO.Descripcion,
+                VehiculoCompatible = inventarioDTO.VehiculoCompatible,
+                CantidadStock = inventarioDTO.CantidadStock,
+                PrecioUnitario = inventarioDTO.PrecioUnitario
+            };
+
+            var isInventario = await _inventarioRepository.Update(id, inventario);
+
+            if (isInventario == null)
+                return false;
+            return isInventario;
+
+        }
+
+        public async Task<bool> EliminarInventario(int id)
+        {
+            var inventario = await _inventarioRepository.Delete(id);
+            if (inventario == false)
+                return false;
+            return inventario;
+        }
     }
 }

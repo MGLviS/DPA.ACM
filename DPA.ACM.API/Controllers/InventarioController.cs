@@ -19,6 +19,15 @@ namespace DPA.ACM.API.Controllers
         }
 
 
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create([FromBody] CrearInventarioDTO crearInventarioDTO)
+        {
+            var result = await _inventarioService.RegistroInventario(crearInventarioDTO);
+            if (!result)
+                return BadRequest();
+            return Ok(result);
+        }
+
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
@@ -33,16 +42,27 @@ namespace DPA.ACM.API.Controllers
             return Ok(result);
         }
 
-        /*
-
-        [HttpPost("GuardarInventario")]
-        public async Task<ActionResult> InsertInventario(Inventario inventario)
+        [HttpPut("Update/{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] ActualizarInventarioDTO actualizarDTO)
         {
-            var result = await _inventarioRepository.Insert(inventario);
+            var result = await _inventarioService.ActualizarInvetario(id, actualizarDTO);
             if (!result)
-                return BadRequest(result);
+                return BadRequest();
             return Ok(result);
         }
+
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _inventarioService.EliminarInventario(id);
+            
+            if(!result) 
+                return BadRequest();
+            
+            return Ok(result);
+        }
+
+        /*
 
 
         [HttpDelete("EliminarInventario")]

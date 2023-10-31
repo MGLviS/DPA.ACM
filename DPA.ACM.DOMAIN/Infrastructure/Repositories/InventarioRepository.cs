@@ -48,9 +48,43 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
         public async Task<IEnumerable<Inventario>> GetByName (string nrepuesto)
         {
          
-            var busqueda = await _dbContext.Inventario.Where(x => x.Nombre.Contains(nrepuesto)).ToListAsync();
+            var busqueda = await _dbContext
+                .Inventario
+                .Where(x => x.Nombre.Contains(nrepuesto)).ToListAsync();
 
             return busqueda;
+        }
+
+        //public async Task<Inventario> GetById(int id)
+        //{
+
+        //    var busqueda = await _dbContext
+        //        .Inventario
+        //        .Where(x => x.InventarioId.Equals(id)).FirstOrDefaultAsync();
+        //    if (busqueda == null)
+        //        return null;
+
+        //    return busqueda;
+        //}
+
+        public async Task<bool> Update(int id, Inventario inventario)
+        {
+            var invetarioUpdate = await _dbContext
+                .Inventario
+                .FindAsync(id);
+
+            if (invetarioUpdate == null)
+                return false;
+
+
+            invetarioUpdate.Nombre = inventario.Nombre;
+            invetarioUpdate.Descripcion = inventario.Descripcion;
+            invetarioUpdate.VehiculoCompatible = inventario.VehiculoCompatible;
+            invetarioUpdate.CantidadStock = inventario.CantidadStock;
+            invetarioUpdate.PrecioUnitario = inventario.PrecioUnitario;
+
+            var rows = await _dbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

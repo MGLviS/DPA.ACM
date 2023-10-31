@@ -8,5 +8,7 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<bool> Insert(Inventario inventario);
         Task<bool> Delete(int id);
         Task<IEnumerable<Inventario>> GetByName(string nrepuesto);
+        Task<bool> Update(int id, Inventario inventario);
+        //Task<Inventario> GetById(int id);
     }
 }
