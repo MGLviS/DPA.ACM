@@ -41,7 +41,7 @@ builder.Services.AddTransient<IInventarioService, InventarioService>();
 builder
     .Services
     .AddTransient<IClienteRepository, ClienteRepository>();
-
+builder.Services.AddTransient<IClienteService, ClienteService>();
 //Gestion Servicio
 builder
     .Services

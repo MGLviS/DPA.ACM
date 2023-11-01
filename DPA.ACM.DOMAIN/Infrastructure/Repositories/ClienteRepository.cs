@@ -70,6 +70,15 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             return await _dbContext.Cliente.ToListAsync();
         }
 
+        public async Task<Cliente> SignIn(string CorreoElectronico, string password)
+        {
+            return await _dbContext
+                .Cliente
+                .Where(x => x.CorreoElectronico == CorreoElectronico && x.Password == password)
+                .FirstOrDefaultAsync();
+        }
+       
+
 
 
     }

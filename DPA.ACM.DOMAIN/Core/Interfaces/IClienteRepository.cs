@@ -8,5 +8,6 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<bool> RegisterCliente(Cliente Cliente);
         Task<IEnumerable<Cliente>> GetAll();
         Task<bool> Actualizar(int id, Cliente cliente);
+        Task <Cliente> SignIn(string correoElectronico, string password);
     }
 }
