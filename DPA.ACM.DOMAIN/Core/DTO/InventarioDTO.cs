@@ -36,7 +36,6 @@ namespace DPA.ACM.DOMAIN.Core.DTO
 
     public class ActualizarInventarioDTO
     {
-        //public int InventarioId { get; set; }
 
         public string? Nombre { get; set; }
 

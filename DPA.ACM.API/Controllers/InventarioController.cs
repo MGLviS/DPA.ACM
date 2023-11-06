@@ -62,17 +62,5 @@ namespace DPA.ACM.API.Controllers
             return Ok(result);
         }
 
-        /*
-
-
-        [HttpDelete("EliminarInventario")]
-        public async Task<ActionResult> DeleteInventario(int id)
-        {
-            var result = await _inventarioRepository.Delete(id);
-            if (!result)
-                return BadRequest(result);
-            return Ok(result);
-        }*/
-
     }
 }

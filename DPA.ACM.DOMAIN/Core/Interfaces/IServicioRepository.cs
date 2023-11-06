@@ -7,7 +7,7 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
     {
         Task<bool> Delete(int id);
         Task<IEnumerable<Servicio>> GetAll();
-        Task<Servicio> GetById(int id);
+        Task<IEnumerable<Servicio>> GetById(int id);
         Task<bool> InsertS(Servicio servcio);
     }
 }

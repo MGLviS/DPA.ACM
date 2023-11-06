@@ -46,7 +46,7 @@ builder
 builder
     .Services
     .AddTransient<IServicioRepository, ServicioRepository>();
-
+builder.Services.AddTransient<IServicioService, ServicioService>();
 
 //Gestion Vehiculo
 builder

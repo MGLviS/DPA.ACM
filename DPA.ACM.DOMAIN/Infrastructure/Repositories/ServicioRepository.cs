@@ -33,9 +33,9 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             return await _dbcontext.Servicio.ToListAsync();
         }
 
-        public async Task<Servicio> GetById(int id)
+        public async Task<IEnumerable<Servicio>> GetById(int id)
         {
-            return await _dbcontext.Servicio.Where(x => x.ServicioId == id).FirstOrDefaultAsync();
+            return await _dbcontext.Servicio.Where(x => x.ServicioId == id).ToListAsync();
         }
 
         //DELETE
