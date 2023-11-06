@@ -21,7 +21,7 @@ public partial class Cliente
 
     public string? Ruc { get; set; }
 
-    public string Password { get; set; } = null!;
+    public string? Password { get; set; }
 
     public virtual ICollection<Factura> Factura { get; set; } = new List<Factura>();
 

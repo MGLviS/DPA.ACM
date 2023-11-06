@@ -1,8 +1,10 @@
-﻿using DPA.ACM.DOMAIN.Core.Entities;
+﻿
+using DPA.ACM.DOMAIN.Core.DTO;
+using DPA.ACM.DOMAIN.Core.Entities;
 using DPA.ACM.DOMAIN.Core.Interfaces;
+using DPA.ACM.DOMAIN.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace DPA.ACM.API.Controllers
 {
@@ -10,48 +12,64 @@ namespace DPA.ACM.API.Controllers
     [ApiController]
     public class ClienteController : ControllerBase
     {
-        private readonly IClienteRepository _ClienteRepository;
+        //private readonly IClienteRepository _ClienteRepository;
+        private readonly IClienteService _clienteService;
 
-        public ClienteController(IClienteRepository ClienteRepository)
+        public ClienteController(IClienteService clienteService)
         {
-            _ClienteRepository = ClienteRepository;
+            _clienteService = clienteService;
         }
 
-
-        [HttpPost("Registrar usuario")]
-        public async Task<IActionResult> RegisterCliente(Cliente Cliente)
-        {
-            var result = await _ClienteRepository.RegisterCliente(Cliente);
-            if (!result)
-                return BadRequest(result);
-            return Ok(result);
-        }
-
-
+        /*
+       [HttpPost("Registrar usuario")]
+       public async Task<IActionResult> RegisterCliente(Cliente Cliente)
+       {
+           var result = await _clienteService.ShowClients(Cliente);
+           if (!result)
+               return BadRequest(result);
+           return Ok(result);
+       }
+        */
+        /*
         [HttpDelete("Eliminar por ID")]
         public async Task<IActionResult> Eliminar(int id)
         {
-            var result = await _ClienteRepository.Eliminar(id);
-            if (!result)
-                return BadRequest(result);
+           var result = await _ClienteRepository.Eliminar(id);
+           if (!result)
+               return BadRequest(result);
 
-            return Ok(result);
+           return Ok(result);
         }
-
-        [HttpGet("Listar todos los Clientes")]
+         */
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var cliente = await _ClienteRepository.GetAll();
-            return Ok(cliente);
+           var cliente = await _clienteService.ShowClients();
+           return Ok(cliente);
         }
-        [HttpPost("Actualizar")]
-        public async Task<IActionResult> Actualizar(int id, Cliente cliente)
+
+        [HttpPost("SignIn")]
+        public async Task<IActionResult>
+            SignIn([FromBody] ClienteAuthDTO clienteAuthDTO)
         {
-            var rows = await _ClienteRepository.Actualizar(id,  cliente);
-            return Ok(rows);
+            var result = await
+                _clienteService.SignIn(clienteAuthDTO);
+
+            if (result == null)
+                return BadRequest("Credenciales inválidas");
+
+            return Ok(result);
+
         }
+        /*
+[HttpPut("Actualizar")]
+public async Task<IActionResult> Actualizar(int id, Cliente cliente)
+{
+var rows = await _ClienteRepository.Actualizar(id,  cliente);
+return Ok(rows);
+}
 
-
+*/
 
 
     }
