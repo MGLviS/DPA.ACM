@@ -44,19 +44,24 @@ namespace DPA.ACM.DOMAIN.Core.Services
                 Anio = item.Anio,
                 NumeroPlaca = item.NumeroPlaca,
                 ClienteId= item.ClienteId,
+                Cliente = new ClienteListaDTO() 
+                { 
+                    Nombre = item.Cliente.Nombre, 
+                    Apellido = item.Cliente.Apellido,
+                }
             }).ToList();
 
             return vehiculoDTO;
         }
 
-        public async Task<IEnumerable<Vehiculo>> GetById(int id)
+        public async Task<IEnumerable<ListarVehiculoDTO>> GetById(int id)
         {
             var vehiculo = await _vehiculoRepository.GetById(id);
 
             if (vehiculo == null)
                 return null;
 
-            var vehiculoDTO = vehiculo.Select(x => new Vehiculo()
+            var vehiculoDTO = vehiculo.Select(x => new ListarVehiculoDTO()
             {
                 VehiculoId = x.VehiculoId,
                 Marca = x.Marca,
@@ -64,6 +69,11 @@ namespace DPA.ACM.DOMAIN.Core.Services
                 Anio = x.Anio,
                 NumeroPlaca = x.NumeroPlaca,
                 ClienteId = x.ClienteId,
+                Cliente= new ClienteListaDTO()
+                {
+                    Nombre = x.Cliente.Nombre,
+                    Apellido = x.Cliente.Apellido,
+                }
             }).ToList();
 
             return vehiculoDTO;

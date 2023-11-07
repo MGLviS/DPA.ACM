@@ -8,7 +8,7 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<bool> ActualizarVehiculo(int id, ActualizarVehiculoDTO vehiculoDTO);
         Task<IEnumerable<ListarVehiculoDTO>> ListaVehiculo();
         Task<bool> EliminarVehiculo(int id);
-        Task<IEnumerable<Vehiculo>> GetById(int id);
+        Task<IEnumerable<ListarVehiculoDTO>> GetById(int id);
         Task<bool> RegistroVehiculo(CrearVehiculoDTO vehiculoDTO);
     }
 }

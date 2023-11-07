@@ -31,6 +31,8 @@ namespace DPA.ACM.DOMAIN.Core.DTO
         public string? NumeroPlaca { get; set; }
 
         public int? ClienteId { get; set; }
+
+        public ClienteListaDTO Cliente { get; set; }
     }
 
     public class ActualizarVehiculoDTO

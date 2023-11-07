@@ -26,7 +26,9 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
 
         public async Task<IEnumerable<Vehiculo>> GetAll()
         {
-            var vehiculos = await _dbcontext.Vehiculo.ToListAsync();
+            var vehiculos = await _dbcontext.Vehiculo
+                .Include(z => z.Cliente)
+                .ToListAsync();
             return vehiculos;
         }
 
@@ -34,6 +36,7 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
         {
             var busqueda = await _dbcontext.Vehiculo
                 .Where(x => x.VehiculoId == id)
+                .Include(z => z.Cliente)
                 .ToListAsync();
             return busqueda;
         }

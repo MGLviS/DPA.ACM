@@ -61,4 +61,10 @@ namespace DPA.ACM.DOMAIN.Core.DTO
         public string? Direccion { get; set; }
         public string? Password  { get; set; }
     }
+
+    public class ClienteListaDTO
+    {
+        public string? Nombre { get; set; }
+        public string? Apellido { get; set; }
+    }
 }

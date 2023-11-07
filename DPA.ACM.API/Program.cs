@@ -52,6 +52,7 @@ builder.Services.AddTransient<IServicioService, ServicioService>();
 builder
     .Services
     .AddTransient<IVehiculoRepository, VehiculoRepository>();
+builder.Services.AddTransient<IVehiculoService, VehiculoService>();
 
 
 builder.Services.AddControllers();
