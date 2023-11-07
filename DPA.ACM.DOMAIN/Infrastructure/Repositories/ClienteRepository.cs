@@ -27,7 +27,7 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
         }
 
 
-        public async Task<bool> Eliminar(int id)
+        public async Task<bool> Delete(int id)
         {
             var Cliente = await _dbContext
                 .Cliente
@@ -41,7 +41,7 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             return rows > 0;
 
         }
-        public async Task<bool> Actualizar(int id, Cliente cliente)
+        public async Task<bool> Update(int id, Cliente cliente)
         {
 
             //verifica que el cliente que se intenta actualizar existe en la base de datos
@@ -56,7 +56,7 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             existCliente.CorreoElectronico = cliente.CorreoElectronico;
             existCliente.Telefono = cliente.Telefono;
             existCliente.Direccion = cliente.Direccion;
-            existCliente.Dni= cliente.Dni;
+            //existCliente.Dni= cliente.Dni;
             existCliente.Password = cliente.Password; 
 
 
@@ -77,7 +77,14 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
                 .Where(x => x.CorreoElectronico == CorreoElectronico && x.Password == password)
                 .FirstOrDefaultAsync();
         }
-       
+
+        public async Task<bool> IsEmailRegistered(string CorreoElectronico)
+        {
+            return await _dbContext
+                .Cliente
+                .Where(x => x.CorreoElectronico == CorreoElectronico).AnyAsync();
+        }
+
 
 
 

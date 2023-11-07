@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DPA.ACM.DOMAIN.Infrastructure.Repositories;
 
 namespace DPA.ACM.DOMAIN.Core.Services
 {
@@ -67,7 +68,57 @@ namespace DPA.ACM.DOMAIN.Core.Services
             return clienteDTO;
 
         }
- 
+
+        public async Task<bool> CreateClient(ClienteRegisterDTO clientDTO)
+        {
+            var existClient = await _clienteRepository.IsEmailRegistered(clientDTO.CorreoElectronico);
+            if (existClient) return false;
+
+            var cliente = new Cliente()
+            {
+                Nombre = clientDTO.Nombre,
+                Apellido = clientDTO.Apellido,
+                CorreoElectronico = clientDTO.CorreoElectronico,
+                Telefono = clientDTO.Telefono,
+                Direccion = clientDTO.Direccion,
+                Dni = clientDTO.Dni,
+                Ruc = clientDTO.Ruc,
+                Password = clientDTO.Password
+            };
+            var result = await _clienteRepository.RegisterCliente(cliente);
+            return result;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var cliente = await _clienteRepository.Delete(id);
+            if (cliente == false)
+                return false;
+            return cliente;
+        }
+
+        public async Task<bool> UpdateClient(int id, ClienteUpdate clienteDTO)
+        {
+
+            var cliente = new Cliente()
+            {
+                Nombre = clienteDTO.Nombre,
+                Apellido = clienteDTO.Apellido,
+                CorreoElectronico = clienteDTO.CorreoElectronico,
+                Telefono = clienteDTO.Telefono,
+                Direccion = clienteDTO.Direccion,
+                Password = clienteDTO.Password
+            };
+
+            var isCliente = await _clienteRepository.Update(id, cliente);
+
+            if (isCliente == null)
+                return false;
+            return isCliente;
+
+        }
+
+
 
     }
 }

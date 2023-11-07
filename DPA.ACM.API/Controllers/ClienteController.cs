@@ -20,27 +20,28 @@ namespace DPA.ACM.API.Controllers
             _clienteService = clienteService;
         }
 
-        /*
-       [HttpPost("Registrar usuario")]
-       public async Task<IActionResult> RegisterCliente(Cliente Cliente)
+        
+       [HttpPost("RegisterClient")]
+       public async Task<IActionResult> RegisterCliente(ClienteRegisterDTO clienteRegisterDTO)
        {
-           var result = await _clienteService.ShowClients(Cliente);
+           var result = await
+                _clienteService.CreateClient(clienteRegisterDTO);
            if (!result)
                return BadRequest(result);
            return Ok(result);
        }
-        */
-        /*
-        [HttpDelete("Eliminar por ID")]
+
+        
+        [HttpDelete("Delete{id}")]
         public async Task<IActionResult> Eliminar(int id)
         {
-           var result = await _ClienteRepository.Eliminar(id);
+           var result = await _clienteService.Delete(id);
            if (!result)
                return BadRequest(result);
 
            return Ok(result);
         }
-         */
+        
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
@@ -61,15 +62,15 @@ namespace DPA.ACM.API.Controllers
             return Ok(result);
 
         }
-        /*
-[HttpPut("Actualizar")]
-public async Task<IActionResult> Actualizar(int id, Cliente cliente)
-{
-var rows = await _ClienteRepository.Actualizar(id,  cliente);
-return Ok(rows);
-}
+ 
+        [HttpPut("Update{id}")]
+        public async Task<IActionResult> UpdateClient(int id, [FromBody] ClienteUpdate clienteUpdate)
+        {
+            var rows = await _clienteService.UpdateClient(id, clienteUpdate);
+            return Ok(rows);
+        }
 
-*/
+
 
 
     }
