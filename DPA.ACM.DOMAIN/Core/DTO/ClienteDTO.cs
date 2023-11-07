@@ -52,7 +52,7 @@ namespace DPA.ACM.DOMAIN.Core.DTO
         public string? Password { get; set; }
     }
 
-    public class ClienteUpdate
+    public class ClienteUpdateDTO
     {
         public string? Nombre { get; set; }
         public string? Apellido { get; set; }
@@ -63,6 +63,12 @@ namespace DPA.ACM.DOMAIN.Core.DTO
     }
 
     public class ClienteListaDTO
+    {
+        public string? Nombre { get; set; }
+        public string? Apellido { get; set; }
+    }
+
+    public class ClienteGetName
     {
         public string? Nombre { get; set; }
         public string? Apellido { get; set; }

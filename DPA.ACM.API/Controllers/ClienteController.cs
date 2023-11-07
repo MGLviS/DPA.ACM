@@ -64,11 +64,20 @@ namespace DPA.ACM.API.Controllers
         }
  
         [HttpPut("Update{id}")]
-        public async Task<IActionResult> UpdateClient(int id, [FromBody] ClienteUpdate clienteUpdate)
+        public async Task<IActionResult> UpdateClient(int id, [FromBody] ClienteUpdateDTO clienteUpdate)
         {
             var rows = await _clienteService.UpdateClient(id, clienteUpdate);
             return Ok(rows);
         }
+        [HttpGet("GetCustom")]
+        public async Task<IActionResult> GetCustom(string inputSearch)
+        {
+            var cliente = await _clienteService.GetByNaApDniRuc(inputSearch);
+            return Ok(cliente);
+        }
+
+
+
 
 
 

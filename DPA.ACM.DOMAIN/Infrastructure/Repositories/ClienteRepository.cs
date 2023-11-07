@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DPA.ACM.DOMAIN.Core.Interfaces;
+using System.Collections;
 
 namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
 {
@@ -26,7 +27,6 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             return rows > 0;
         }
 
-
         public async Task<bool> Delete(int id)
         {
             var Cliente = await _dbContext
@@ -41,6 +41,7 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             return rows > 0;
 
         }
+
         public async Task<bool> Update(int id, Cliente cliente)
         {
 
@@ -65,6 +66,7 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
                 return rows > 0; ; // Actualización exitosa
 
         }
+
         public async Task<IEnumerable<Cliente>> GetAll()
         {
             return await _dbContext.Cliente.ToListAsync();
@@ -83,6 +85,19 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             return await _dbContext
                 .Cliente
                 .Where(x => x.CorreoElectronico == CorreoElectronico).AnyAsync();
+        }
+
+        public async Task<IEnumerable<Cliente>> GetByNaApDniRuc(string inputSearch)
+        {
+            
+            var search = await _dbContext
+                .Cliente
+                .Where(x => x.Nombre.Contains(inputSearch) ||
+                            x.Apellido.Contains(inputSearch) ||
+                            x.Dni.Contains(inputSearch) ||
+                            x.Ruc.Contains(inputSearch)).ToListAsync();
+
+            return search;
         }
 
 

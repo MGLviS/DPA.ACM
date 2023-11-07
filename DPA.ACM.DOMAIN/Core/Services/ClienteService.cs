@@ -97,7 +97,7 @@ namespace DPA.ACM.DOMAIN.Core.Services
             return cliente;
         }
 
-        public async Task<bool> UpdateClient(int id, ClienteUpdate clienteDTO)
+        public async Task<bool> UpdateClient(int id, ClienteUpdateDTO clienteDTO)
         {
 
             var cliente = new Cliente()
@@ -117,6 +117,35 @@ namespace DPA.ACM.DOMAIN.Core.Services
             return isCliente;
 
         }
+
+        public async Task<IEnumerable<ClienteDTO>> GetByNaApDniRuc(string inputSearch)
+        {
+            var cliente = await _clienteRepository.GetByNaApDniRuc(inputSearch);
+            //Convert cliente to ClienteDTO
+
+                // Si cliente no es nulo, puedes continuar con la conversión a ClienteDTO.
+                var clienteList = new List<ClienteDTO>();
+
+                foreach (var item in cliente)
+                {
+                    clienteList.Add(new ClienteDTO
+                    {
+                        ClienteId = item.ClienteId,
+                        Nombre = item.Nombre,
+                        Apellido = item.Apellido,
+                        CorreoElectronico = item.CorreoElectronico,
+                        Telefono = item.Telefono,
+                        Direccion = item.Direccion,
+                        Dni = item.Dni,
+                        Ruc = item.Ruc
+                    });
+                }
+
+
+                return clienteList;
+            }
+
+        
 
 
 

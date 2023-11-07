@@ -10,5 +10,6 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<bool> Update(int id, Cliente cliente);
         Task<bool> IsEmailRegistered(string CorreoElectronico);
         Task <Cliente> SignIn(string correoElectronico, string password);
+        Task<IEnumerable<Cliente>> GetByNaApDniRuc(string inputSearch);
     }
 }

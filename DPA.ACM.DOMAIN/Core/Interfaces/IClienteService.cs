@@ -8,6 +8,7 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<ClienteReponseDTO> SignIn(ClienteAuthDTO clienteAuthDTO);
         Task<bool> CreateClient(ClienteRegisterDTO clientDTO);
         Task<bool> Delete(int id);
-        Task<bool> UpdateClient(int id, ClienteUpdate clienteDTO);
+        Task<bool> UpdateClient(int id, ClienteUpdateDTO clienteDTO);
+        Task<IEnumerable<ClienteDTO>> GetByNaApDniRuc(string inputSearch);
     }
 }
