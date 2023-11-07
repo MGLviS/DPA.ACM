@@ -6,7 +6,8 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
     {
         Task<bool> Delete(int id);
         Task<IEnumerable<Vehiculo>> GetAll();
-        Task<Vehiculo> GetById(int id);
+        Task<IEnumerable<Vehiculo>> GetById(int id);
+        Task<bool> Update(int id, Vehiculo vehiculo);
         Task<bool> InsertV(Vehiculo vehiculo);
     }
 }

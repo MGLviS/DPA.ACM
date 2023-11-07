@@ -26,12 +26,34 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
 
         public async Task<IEnumerable<Vehiculo>> GetAll()
         {
-            return await _dbcontext.Vehiculo.ToListAsync();
+            var vehiculos = await _dbcontext.Vehiculo.ToListAsync();
+            return vehiculos;
         }
 
-        public async Task<Vehiculo> GetById(int id)
+        public async Task<IEnumerable<Vehiculo>> GetById(int id)
         {
-            return await _dbcontext.Vehiculo.Where(x => x.VehiculoId == id).FirstOrDefaultAsync();
+            var busqueda = await _dbcontext.Vehiculo
+                .Where(x => x.VehiculoId == id)
+                .ToListAsync();
+            return busqueda;
+        }
+
+        //UPDATE
+        public async Task<bool> Update(int id,  Vehiculo vehiculo)
+        {
+            var vehiculoUpdate = await _dbcontext.Vehiculo.FindAsync(id);
+
+            if (vehiculoUpdate == null)
+                return false;
+
+            vehiculoUpdate.Marca = vehiculo.Marca;
+            vehiculoUpdate.Modelo = vehiculo.Modelo;
+            vehiculoUpdate.Anio = vehiculo.Anio;
+            vehiculoUpdate.NumeroPlaca = vehiculo.NumeroPlaca;
+            vehiculoUpdate.ClienteId = vehiculo.ClienteId;
+
+            var rows = await _dbcontext.SaveChangesAsync();
+            return rows > 0;
         }
 
         //DELETE
