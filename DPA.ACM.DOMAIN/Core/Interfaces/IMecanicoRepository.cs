@@ -13,5 +13,6 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<bool> Insert(Mecanico mecanico);
         Task<bool> Delete(int id);
         Task<Mecanico> GetByName(string nomMecanico);
+        Task<bool> IsTelefonoRegistered(string Telefono);
     }
 }

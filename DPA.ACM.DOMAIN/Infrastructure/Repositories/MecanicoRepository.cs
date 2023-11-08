@@ -51,5 +51,12 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
                 .Mecanico
                 .Where(x => x.Nombre == nomMecanico).FirstOrDefaultAsync();
         }
+
+        public async Task<bool> IsTelefonoRegistered(string Telefono)
+        {
+            return await _dbContext
+                .Mecanico
+                .Where(x => x.Telefono == Telefono).AnyAsync();
+        }
     }
 }

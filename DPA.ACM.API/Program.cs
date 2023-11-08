@@ -28,7 +28,7 @@ builder
 builder
     .Services.
     AddTransient<IMecanicoRepository, MecanicoRepository>();
-
+builder.Services.AddTransient<IMecanicoService, MecanicoService>();
 
 //Inventario Repuestos
 
