@@ -30,8 +30,11 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
         public async Task<IEnumerable<DetalleInventario>> GetById(int id)
         {
             var busqueda = await _dbcontext.DetalleInventario
-                .Where(x => x.DetalleInventarioId.Equals(id)).ToListAsync();
-
+                .Where(x => x.DetalleInventarioId == id)
+                .Include(z => z.Inventario)
+                .ToListAsync();
+            if (busqueda == null)
+                return null;
             return busqueda;
         }
 

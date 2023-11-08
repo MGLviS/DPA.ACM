@@ -42,7 +42,7 @@ namespace DPA.ACM.DOMAIN.Core.Services
             if (detalle == null)
                 return null;
 
-            var detalleDTO = detalle.Select(item => new DIListarDTO
+            var detallesDTO = detalle.Select(item => new DIListarDTO()
             {
                 DetalleInventarioId = item.DetalleInventarioId,
                 CantidadUtilizada = item.CantidadUtilizada,
@@ -53,7 +53,7 @@ namespace DPA.ACM.DOMAIN.Core.Services
                 }
             }).ToList();
 
-            return detalleDTO;
+            return detallesDTO;
         }
 
         public async Task<bool> Insert(int idrepuesto, int cantidad, DICrearDTO detalleDTO)
@@ -81,7 +81,7 @@ namespace DPA.ACM.DOMAIN.Core.Services
             };
 
             var isDetalle = await _detInvRepository.Update(id, detalle);
-            if (isDetalle == null)
+            if (isDetalle == false)
                 return false;
             return isDetalle;
         }
