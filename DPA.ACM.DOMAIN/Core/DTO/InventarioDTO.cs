@@ -47,4 +47,9 @@ namespace DPA.ACM.DOMAIN.Core.DTO
 
         public decimal? PrecioUnitario { get; set; }
     }
+
+    public class DetInvDTO
+    {
+        public string? Nombre { get; set; }
+    }
 }
