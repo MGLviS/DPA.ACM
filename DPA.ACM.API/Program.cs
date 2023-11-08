@@ -61,6 +61,12 @@ builder
     .AddTransient<IVehiculoRepository, VehiculoRepository>();
 builder.Services.AddTransient<IVehiculoService, VehiculoService>();
 
+//Detalle Inventario
+builder
+    .Services
+    .AddTransient<IDetalleInvRepository, DetalleInvRepository>();
+builder.Services.AddTransient<IDetInvService,DetInvService>();
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
