@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var _config = builder.Configuration; //obtener atributos de la cadena de conexion
-var _cnx = _config.GetConnectionString("DevConnection"); // cadena de conexión
+var _cnx = _config.GetConnectionString("DevConnection"); // cadena de conexiï¿½n
 builder.Services.AddDbContext<AutoCareManagerContext>(options =>
 {
 options.UseSqlServer(_cnx);
@@ -42,6 +42,13 @@ builder
     .Services
     .AddTransient<IClienteRepository, ClienteRepository>();
 builder.Services.AddTransient<IClienteService, ClienteService>();
+
+//Gestion Factura
+builder
+    .Services
+    .AddTransient<IFacturaRepository, FacturaRepository>();
+builder.Services.AddTransient<IFacturaService, FacturaService>();
+
 //Gestion Servicio
 builder
     .Services
