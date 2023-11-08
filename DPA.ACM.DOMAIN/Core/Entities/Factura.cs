@@ -13,6 +13,8 @@ public partial class Factura
 
     public int? ClienteId { get; set; }
 
+    public bool? Cancelado { get; set; }
+
     public virtual Cliente? Cliente { get; set; }
 
     public virtual ICollection<DetallesFactura> DetallesFactura { get; set; } = new List<DetallesFactura>();

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DPA.ACM.DOMAIN.Core.DTO;
 using DPA.ACM.DOMAIN.Core.Interfaces;
+using DPA.ACM.DOMAIN.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,6 +27,42 @@ namespace DPA.ACM.API.Controllers
         {
             var factura = await _facturaService.ShowFacturas();
             return Ok(factura);
+        }
+
+        [HttpGet("GetActivas")]
+        public async Task<IActionResult> GetActivas()
+        {
+            var factura = await _facturaService.ShowFactActivas();
+            return Ok(factura);
+        }
+
+        [HttpGet("GetNoActivas")]
+        public async Task<IActionResult> GetNoActivas()
+        {
+            var factura = await _facturaService.ShowFactCanceladas();
+            return Ok(factura);
+        }
+        [HttpGet("GetCustom")]
+        public async Task<IActionResult> GetCustom(string inputSearch)
+        {
+            var factura = await _facturaService.GetCustom(inputSearch);
+            return Ok(factura);
+        }
+        [HttpPut("ChangeStateFactura{id}")]
+        public async Task<IActionResult> ChangeStateFactura(int id, [FromBody] FactCancelDTO factCancelDTO)
+        {
+            var rows = await _facturaService.SetCancelFactura(id, factCancelDTO);
+            return Ok(rows);
+        }
+
+        [HttpPost("RegisterFactura")]
+        public async Task<IActionResult> RegisterFactura(FactRegisterDTO factRegisterDTO)
+        {
+            var result = await
+                 _facturaService.CreateFactura(factRegisterDTO);
+            if (!result)
+                return BadRequest(result);
+            return Ok(result);
         }
     }
 }

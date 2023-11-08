@@ -1,5 +1,6 @@
 ﻿using System;
 using DPA.ACM.DOMAIN.Core.DTO;
+using DPA.ACM.DOMAIN.Core.Entities;
 using DPA.ACM.DOMAIN.Core.Interfaces;
 using DPA.ACM.DOMAIN.Infrastructure.Repositories;
 
@@ -27,6 +28,7 @@ namespace DPA.ACM.DOMAIN.Core.Services
                     FechaFacturacion = item.FechaFacturacion,
                     Total = item.Total,
                     ClienteId = item.ClienteId,
+                    Cancelado =item.Cancelado,
                 });
             }
 
@@ -34,6 +36,97 @@ namespace DPA.ACM.DOMAIN.Core.Services
             return facturalist;
         }
 
+        public async Task<IEnumerable<FacturasStateDTO>> ShowFactActivas()
+        {
+            var factura = await _facturaRepository.GetFactActivas();
+            //Convert factura to FacturaDTO
+            var facturalist = new List<FacturasStateDTO>();
+            foreach (var item in factura)
+            {
+                facturalist.Add(new FacturasStateDTO
+                {
+                    FacturaId = item.FacturaId,
+                    FechaFacturacion = item.FechaFacturacion,
+                    Total = item.Total,
+                    ClienteId = item.ClienteId,
+                    
+                });
+            }
+
+
+            return facturalist;
+        }
+
+        public async Task<IEnumerable<FacturasStateDTO>> ShowFactCanceladas()
+        {
+            var factura = await _facturaRepository.GetFactCancelas();
+            //Convert factura to FacturaDTO
+            var facturalist = new List<FacturasStateDTO>();
+            foreach (var item in factura)
+            {
+                facturalist.Add(new FacturasStateDTO
+                {
+                    FacturaId = item.FacturaId,
+                    FechaFacturacion = item.FechaFacturacion,
+                    Total = item.Total,
+                    ClienteId = item.ClienteId,
+
+                });
+            }
+
+
+            return facturalist;
+        }
+
+        public async Task<IEnumerable<FactHistorialDTO>> GetCustom(string inputSearch)
+        {
+            var factura = await _facturaRepository.GetCustom(inputSearch);
+            //Convert cliente to FactHistorialDTO
+
+            // Si cliente no es nulo, puedes continuar con la conversión a FactHistorialDTO.
+            var facturaList = new List<FactHistorialDTO>();
+
+            foreach (var item in factura)
+            {
+                facturaList.Add(new FactHistorialDTO
+                {
+                    FacturaId = item.FacturaId,
+                    FechaFacturacion = item.FechaFacturacion,
+                    Total = item.Total,
+                });
+            }
+
+
+            return facturaList;
+        }
+
+        public async Task<bool> SetCancelFactura(int id, FactCancelDTO factCancelDTO)
+        {
+            //var facturad = await _facturaRepository.SetCancelFactura(id);
+            var factura = new Factura()
+            {
+                Cancelado = factCancelDTO.Cancelado,
+            };
+
+            var isFactura = await _facturaRepository.SetCancelFactura(id, factura);
+            if (isFactura == null)
+                return false;
+            return isFactura;
+        }
+
+        public async Task<bool> CreateFactura(FactRegisterDTO factRegisterDTO)
+        {
+
+            var factura = new Factura()
+            {
+                FechaFacturacion = factRegisterDTO.FechaFacturacion,
+                Total = factRegisterDTO.Total,
+                ClienteId = factRegisterDTO.ClienteId,
+                Cancelado = false,
+            };
+            var result = await _facturaRepository.RegisterFactura(factura);
+            return result;
+        }
     }
 }
 
