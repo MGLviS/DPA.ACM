@@ -18,11 +18,13 @@ options.UseSqlServer(_cnx);
 builder
     .Services.
     AddTransient<IPropietarioRepository, PropietarioRepository>();
+builder.Services.AddTransient<IPropietarioService, PropietarioService>();
 
 //Gestion Taller
 builder
     .Services.
     AddTransient<ITallerRepository, TallerRepository>();
+//builder.Services.AddTransient<ITallerService, TallerService>();
 
 //Gestion Mecanico
 builder
