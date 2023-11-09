@@ -33,6 +33,28 @@ namespace DPA.ACM.DOMAIN.Core.DTO
     
     public class PropRegisterDTO
     {
+        
+        public string? Nombre { get; set; }
+
+        public string? Apellido { get; set; }
+
+        public string? CorreoElectronico { get; set; }
+
+        public string? Telefono { get; set; }
+
+        public string? Direccion { get; set; }
+
+        public string? Dni { get; set; }
+
+        public string? Password { get; set; }
+
+        public int? TallerId { get; set; }
+
+        
+    }
+
+    public class PropietarioResponseDTO
+    {
         public int PropietarioId { get; set; }
 
         public string? Nombre { get; set; }
@@ -51,6 +73,40 @@ namespace DPA.ACM.DOMAIN.Core.DTO
 
         public int? TallerId { get; set; }
 
-        public virtual Taller? Taller { get; set; }
+        
     }
+
+    public class PropietarioAuthDTO
+    {
+        
+        public string? CorreoElectronico { get; set; }
+
+        public string? Password { get; set; }
+
+
+    }
+
+    public class PropietarioUpdateDTO
+    {
+        public int PropietarioId { get; set; }
+
+        public string? Nombre { get; set; }
+
+        public string? Apellido { get; set; }
+
+        public string? CorreoElectronico { get; set; }
+
+        public string? Telefono { get; set; }
+
+        public string? Direccion { get; set; }
+
+        public string? Dni { get; set; }
+
+        public string? Password { get; set; }
+
+        public int? TallerId { get; set; }
+
+
+    }
+
 }

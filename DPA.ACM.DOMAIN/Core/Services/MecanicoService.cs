@@ -63,6 +63,33 @@ namespace DPA.ACM.DOMAIN.Core.Services
             var result = await _mecanicoRepository.Insert(mecanico);
             return result;
         }
+
+        public async Task<bool> Delete(int id)
+        {
+            var mecanico = await _mecanicoRepository.Delete(id);
+            if (mecanico == false)
+                return false;
+            return mecanico;
+        }
+
+        public async Task<bool> UpdateMecanico(int id, MecanicoUpdateDTO mecanicoDTO)
+        {
+            var mecanico = new Mecanico()
+            {
+                Nombre = mecanicoDTO.Nombre,
+                Apellido=mecanicoDTO.Apellido,
+                Telefono=mecanicoDTO.Telefono,
+                Especialidad=mecanicoDTO.Especialidad,
+                TallerId=mecanicoDTO.TallerId,
+                Estado=mecanicoDTO.Estado
+
+            };
+
+            var isMecanico = await _mecanicoRepository.Update(id, mecanico);
+            if (isMecanico == null)
+                return false;
+            return isMecanico;
+        }
         
     }
 }

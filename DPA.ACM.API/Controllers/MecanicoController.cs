@@ -1,6 +1,7 @@
 ﻿using DPA.ACM.DOMAIN.Core.DTO;
 using DPA.ACM.DOMAIN.Core.Entities;
 using DPA.ACM.DOMAIN.Core.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPA.ACM.API.Controllers
@@ -41,15 +42,22 @@ namespace DPA.ACM.API.Controllers
               {
                   var mecanico = await _mecanicoRepository.GetByName(nomMecanico);
                   return Ok(mecanico);
-              }
+              }*/
 
-              [HttpDelete("EliminarTaller")]
-              public async Task<ActionResult> DeleteMecanico(int id)
+        [HttpDelete("DeleteMecanico")]
+              public async Task<IActionResult> DeleteMecanico(int id)
               {
-                  var result = await _mecanicoRepository.Delete(id);
+                  var result = await _mecanicoService.Delete(id);
                   if (!result)
                       return BadRequest(result);
                   return Ok(result);
-              }*/
+              }
+        [HttpPut("Update{id}")]
+        public async Task<IActionResult> UpdateMecanico(int id, [FromBody] MecanicoUpdateDTO mecanicoUpdate)
+        {
+            var rows = await _mecanicoService.UpdateMecanico(id, mecanicoUpdate);
+            return Ok(rows);
+        }
+
     }
 }

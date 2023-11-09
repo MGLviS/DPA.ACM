@@ -8,6 +8,10 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
 {
     public interface IPropietarioService
     {
-        Task<bool> RegPropietario(PropRegisterDTO propRegisterDTO);
+        Task<bool> RegPropietario(PropRegisterDTO propDTO);
+        Task<bool> Delete(int id);
+        Task<bool> Update(int id, PropietarioUpdateDTO propUpdateDTO);
+        Task<PropietarioResponseDTO> SignIn(PropietarioAuthDTO propietarioAuthDTO);
+
     }
 }

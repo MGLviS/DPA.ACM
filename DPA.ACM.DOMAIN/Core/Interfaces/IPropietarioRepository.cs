@@ -11,5 +11,9 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
     {
         Task<bool> IsEmailRegistered(string correoElectronico);
         Task<bool> RegPropietario(Propetario prop);
+        Task<bool> Delete(int id);
+        Task<bool> Update(int id, Propetario propietario);
+        Task<IEnumerable<Propetario>> GetAll();
+        Task<Propetario> SignIn(string CorreoElectronico, string password);
     }
 }

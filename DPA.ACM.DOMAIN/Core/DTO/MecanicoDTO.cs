@@ -69,7 +69,7 @@ namespace DPA.ACM.DOMAIN.Core.DTO
 
         //public virtual ICollection<Programacion> Programacion { get; set; } = new List<Programacion>();
 
-        public virtual Taller? Taller { get; set; }
+        
     }
 
     public class MecanicoListaDTO

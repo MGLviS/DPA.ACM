@@ -14,5 +14,7 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<bool> Delete(int id);
         Task<Mecanico> GetByName(string nomMecanico);
         Task<bool> IsTelefonoRegistered(string Telefono);
+
+        Task<bool> Update(int id, Mecanico mecanico);
     }
 }

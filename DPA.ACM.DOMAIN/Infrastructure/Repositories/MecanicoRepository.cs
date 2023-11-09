@@ -58,5 +58,24 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
                 .Mecanico
                 .Where(x => x.Telefono == Telefono).AnyAsync();
         }
+
+        public async Task<bool> Update(int id, Mecanico mecanico)
+        {
+            var existMecanico = await _dbContext.Mecanico.FindAsync(id);
+            if (existMecanico == null)
+            {
+                return false;
+            }
+
+            existMecanico.Nombre = mecanico.Nombre;
+            existMecanico.Apellido = mecanico.Apellido;
+            existMecanico.Telefono = mecanico.Telefono;
+            existMecanico.Especialidad = mecanico.Especialidad;
+            existMecanico.TallerId = mecanico.TallerId;
+            existMecanico.Estado = mecanico.Estado;
+
+            var rows = await _dbContext.SaveChangesAsync();
+            return rows > 0;
+        }
     }
 }

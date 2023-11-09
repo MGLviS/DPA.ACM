@@ -12,5 +12,8 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<IEnumerable<MecanicoDTO>> ShowMecanico();
 
         Task<bool> CreateMecanico(MecanicoRegisterDTO mecanicoDTO);
+
+        Task<bool> Delete(int id);
+        Task<bool> UpdateMecanico(int id, MecanicoUpdateDTO mecanicoDTO);
     }
 }

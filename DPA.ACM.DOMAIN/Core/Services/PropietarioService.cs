@@ -21,8 +21,8 @@ namespace DPA.ACM.DOMAIN.Core.Services
 
         public async Task<bool> RegPropietario(PropRegisterDTO propDTO)
         {
-            var existuser = await _propRespository.IsEmailRegistered(propDTO.CorreoElectronico);
-            if (existuser) return false;
+            var existProp = await _propRespository.IsEmailRegistered(propDTO.CorreoElectronico);
+            if (existProp) return false;
 
             var prop = new Propetario()
             {
@@ -33,11 +33,59 @@ namespace DPA.ACM.DOMAIN.Core.Services
                 Direccion = propDTO.Direccion,
                 Dni = propDTO.Dni,
                 Password = propDTO.Password,
-                Taller = propDTO.Taller
+                TallerId = propDTO.TallerId
             };
 
             var result = await _propRespository.RegPropietario(prop);
             return result;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var propietario = await _propRespository.Delete(id);
+            if (propietario == false)
+                return false;
+            return propietario;
+        }
+
+        public async Task<bool> Update(int id, PropietarioUpdateDTO propUpdateDTO)
+        {
+            var propietario = new Propetario()
+            {
+                Nombre = propUpdateDTO.Nombre,
+                Apellido = propUpdateDTO.Apellido,
+                CorreoElectronico = propUpdateDTO.CorreoElectronico,
+                Telefono = propUpdateDTO.Telefono,
+                Direccion = propUpdateDTO.Direccion,
+                Dni = propUpdateDTO.Dni,
+                Password = propUpdateDTO.Password,
+                TallerId = propUpdateDTO.TallerId
+            };
+
+            var isPropietario = await _propRespository.Update(id, propietario);
+            if (isPropietario == null)
+                return false;
+            return isPropietario;
+        }
+
+        public async Task<PropietarioResponseDTO>SignIn(PropietarioAuthDTO propietarioAuthDTO)
+        {
+            var propietario = await _propRespository
+                .SignIn(propietarioAuthDTO.CorreoElectronico, propietarioAuthDTO.Password);
+            if (propietario == null) return null;
+
+            var propietarioDTO = new PropietarioResponseDTO()
+            {
+                PropietarioId = propietario.PropietarioId,
+                Nombre = propietario.Nombre,
+                Apellido = propietario.Apellido,
+                CorreoElectronico = propietario.CorreoElectronico,
+                Telefono = propietario.Telefono,
+                Direccion = propietario.Direccion,
+                Dni = propietario.Dni,
+                TallerId = propietario.TallerId
+            };
+            return propietarioDTO;
         }
     }
 }
