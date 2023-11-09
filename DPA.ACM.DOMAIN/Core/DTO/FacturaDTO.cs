@@ -44,13 +44,13 @@ namespace DPA.ACM.DOMAIN.Core.DTO
     public class FactRegisterDTO
     {
 
-        public DateTime? FechaFacturacion { get; set; }
+        //public DateTime? FechaFacturacion { get; set; }
 
         public decimal? Total { get; set; }
 
         public int? ClienteId { get; set; }
 
-        public bool? Cancelado { get; set; }
+        //public bool? Cancelado { get; set; }
 
     }
 

@@ -3,6 +3,7 @@ using DPA.ACM.DOMAIN.Core.DTO;
 using DPA.ACM.DOMAIN.Core.Entities;
 using DPA.ACM.DOMAIN.Core.Interfaces;
 using DPA.ACM.DOMAIN.Infrastructure.Repositories;
+using DPA.ACM.DOMAIN.Infrastructure.Shared;
 
 namespace DPA.ACM.DOMAIN.Core.Services
 {
@@ -10,9 +11,11 @@ namespace DPA.ACM.DOMAIN.Core.Services
 
     {
         private readonly IFacturaRepository _facturaRepository;
+        //private readonly GetTimeNow _getTimeNow;
         public FacturaService(IFacturaRepository facturaRepository)
         {
             _facturaRepository = facturaRepository;
+            //_getTimeNow = getTimeNow;
         }
 
         public async Task<IEnumerable<FacturaDTO>> ShowFacturas()
@@ -28,8 +31,8 @@ namespace DPA.ACM.DOMAIN.Core.Services
                     FechaFacturacion = item.FechaFacturacion,
                     Total = item.Total,
                     ClienteId = item.ClienteId,
-                    Cancelado =item.Cancelado,
-                });
+                    Cancelado = item.Cancelado,
+                }) ;
             }
 
 
@@ -116,10 +119,11 @@ namespace DPA.ACM.DOMAIN.Core.Services
 
         public async Task<bool> CreateFactura(FactRegisterDTO factRegisterDTO)
         {
-
+            //GetTimeNow getTime = new GetTimeNow();
+ 
             var factura = new Factura()
             {
-                FechaFacturacion = factRegisterDTO.FechaFacturacion,
+                FechaFacturacion = DateTime.Now.Date,
                 Total = factRegisterDTO.Total,
                 ClienteId = factRegisterDTO.ClienteId,
                 Cancelado = false,
