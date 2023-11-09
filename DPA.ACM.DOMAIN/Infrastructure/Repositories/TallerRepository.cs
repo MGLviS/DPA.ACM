@@ -24,7 +24,7 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             return await _dbContext.Taller.ToListAsync();
         }
 
-        public async Task<bool> Insert(Taller taller)
+        public async Task<bool> RegisterTaller(Taller taller)
         {
             await _dbContext.Taller.AddAsync(taller);
             int rows = await _dbContext.SaveChangesAsync();
@@ -51,5 +51,26 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
                 .Taller
                 .Where(x => x.NombreTaller == nomtaller).FirstOrDefaultAsync();
         }
+
+        public async Task<bool> Update(int id, Taller taller)
+        {
+            var existTaller = await _dbContext.Taller.FindAsync(id);
+            if (existTaller == null)
+            {
+                return false;
+            }
+
+            existTaller.NombreTaller = taller.NombreTaller;
+            existTaller.Sede = taller.Sede;
+            existTaller.Direccion = taller.Direccion;
+            existTaller.Contacto = taller.Contacto;
+            existTaller.Estado = taller.Estado;
+
+            var rows = await _dbContext.SaveChangesAsync();
+            return rows > 0;
+
+        }
+
+        
     }
 }

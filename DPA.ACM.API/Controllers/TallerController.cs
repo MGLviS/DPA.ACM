@@ -1,4 +1,5 @@
-﻿using DPA.ACM.DOMAIN.Core.Entities;
+﻿using DPA.ACM.DOMAIN.Core.DTO;
+using DPA.ACM.DOMAIN.Core.Entities;
 using DPA.ACM.DOMAIN.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,45 +10,52 @@ namespace DPA.ACM.API.Controllers
     [ApiController]
     public class TallerController : ControllerBase
     {
-        private readonly ITallerRepository _tallerRepository;
+        private readonly ITallerService _tallerService;
 
-        public TallerController(ITallerRepository tallerRepository)
+        public TallerController(ITallerService tallerService)
         {
-            _tallerRepository = tallerRepository;
+            _tallerService = tallerService;
         }
 
 
 
-        [HttpGet("ListarTaller")]
+        [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var taller = await _tallerRepository.GetAll();
+            var taller = await _tallerService.ShowTalleres();
             return Ok(taller);
         }
 
-        [HttpPost("GuardarTaller")]
-        public async Task<ActionResult> InsertTaller(Taller taller)
+        [HttpPost("RegisterTaller")]
+        public async Task<ActionResult> InsertTaller(TallerRegisterDTO tallerRegisterDTO)
         {
-            var result = await _tallerRepository.Insert(taller);
+            var result = await _tallerService.RegistrarTaller(tallerRegisterDTO);
             if (!result)
                 return BadRequest(result);
             return Ok(result);
         }
 
-        [HttpGet("Buscar/{name}")]
+ /*       [HttpGet("Buscar/{name}")]
         public async Task<ActionResult> SearchTaller(string nomtaller)
         {
             var taller = await _tallerRepository.GetByName(nomtaller);
             return Ok(taller);
-        }
+        }*/
 
-        [HttpDelete("EliminarTaller")]
+        [HttpDelete("Delete{id}")]
         public async Task<ActionResult> DeleteTaller(int id)
         {
-            var result = await _tallerRepository.Delete(id);
+            var result = await _tallerService.Delete(id);
             if (!result)
                 return BadRequest(result);
             return Ok(result);
+        }
+
+        [HttpPut("Update{id}")]
+        public async Task<IActionResult> UpdateTaller(int id, [FromBody]TallerUpdateDTO tallerUpdateDTO)
+        {
+            var rows = await _tallerService.UpdateTaller(id, tallerUpdateDTO);
+            return Ok(rows);
         }
 
     }

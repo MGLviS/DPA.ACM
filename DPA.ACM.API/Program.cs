@@ -24,7 +24,7 @@ builder.Services.AddTransient<IPropietarioService, PropietarioService>();
 builder
     .Services.
     AddTransient<ITallerRepository, TallerRepository>();
-//builder.Services.AddTransient<ITallerService, TallerService>();
+builder.Services.AddTransient<ITallerService, TallerService>();
 
 //Gestion Mecanico
 builder
