@@ -1,7 +1,7 @@
 ﻿using System;
 namespace DPA.ACM.DOMAIN.Core.DTO
 {
-	public class FacturaDTO
+    public class FacturaDTO
     {
         public int FacturaId { get; set; }
 
@@ -54,6 +54,16 @@ namespace DPA.ACM.DOMAIN.Core.DTO
 
     }
 
+    public class FacturasxClientDTO
+    {
+        public int FacturaId { get; set; }
 
+        public DateTime? FechaFacturacion { get; set; }
+
+        public decimal? Total { get; set; }
+
+        public bool? Cancelado { get; set; }
+
+
+    }
 }
-

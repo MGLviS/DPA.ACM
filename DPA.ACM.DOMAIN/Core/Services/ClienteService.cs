@@ -14,11 +14,11 @@ namespace DPA.ACM.DOMAIN.Core.Services
 
     {
         private readonly IClienteRepository _clienteRepository;
-       //private readonly IJWTFactory _jwtFactory;
+        //private readonly IJWTFactory _jwtFactory;
         public ClienteService(IClienteRepository clienteRepository)
         {
             _clienteRepository = clienteRepository;
-           // _jwtFactory = jwtFactory;
+            // _jwtFactory = jwtFactory;
         }
         public async Task<IEnumerable<ClienteDTO>> ShowClients()
         {
@@ -45,7 +45,7 @@ namespace DPA.ACM.DOMAIN.Core.Services
         }
 
         //este metodo requiere un objeto de tipo clienteAuthDTO y devuelve  un objeto de tipo ClienteReponseDTO
-        public async Task<ClienteReponseDTO>SignIn(ClienteAuthDTO clienteAuthDTO)
+        public async Task<ClienteReponseDTO> SignIn(ClienteAuthDTO clienteAuthDTO)
         {
             var cliente = await _clienteRepository
                 .SignIn(clienteAuthDTO.CorreoElectronico, clienteAuthDTO.Password);
@@ -123,31 +123,55 @@ namespace DPA.ACM.DOMAIN.Core.Services
             var cliente = await _clienteRepository.GetByNaApDniRuc(inputSearch);
             //Convert cliente to ClienteDTO
 
-                // Si cliente no es nulo, puedes continuar con la conversión a ClienteDTO.
-                var clienteList = new List<ClienteDTO>();
+            // Si cliente no es nulo, puedes continuar con la conversión a ClienteDTO.
+            var clienteList = new List<ClienteDTO>();
 
-                foreach (var item in cliente)
+            foreach (var item in cliente)
+            {
+                clienteList.Add(new ClienteDTO
                 {
-                    clienteList.Add(new ClienteDTO
-                    {
-                        ClienteId = item.ClienteId,
-                        Nombre = item.Nombre,
-                        Apellido = item.Apellido,
-                        CorreoElectronico = item.CorreoElectronico,
-                        Telefono = item.Telefono,
-                        Direccion = item.Direccion,
-                        Dni = item.Dni,
-                        Ruc = item.Ruc
-                    });
-                }
+                    ClienteId = item.ClienteId,
+                    Nombre = item.Nombre,
+                    Apellido = item.Apellido,
+                    CorreoElectronico = item.CorreoElectronico,
+                    Telefono = item.Telefono,
+                    Direccion = item.Direccion,
+                    Dni = item.Dni,
+                    Ruc = item.Ruc
+                });
+            }
 
 
-                return clienteList;
+            return clienteList;
         }
 
-        
+        //public async Task<IEnumerable<ClienteFactDTO>> GetFactxClient(int idClient)
+        //{
+        //    {
+        //        var cliente = await _clienteRepository.GetClienteWithFacturas(idClient);
 
+        //        if (cliente == null)
+        //        {
+        //            return null;
+        //        }
 
+        //        // Mapeo de Cliente y sus facturas a ClienteFactDTO
+        //        var clienteFactDTOs = cliente.Select(cliente => new ClienteFactDTO
+        //        {
+        //            //ClienteId = cliente.,
+        //            Nombre = cliente.Nombre,
+        //            Apellido = cliente.Apellido,
+        //            Dni = cliente.Dni,
+        //            Ruc = cliente.Ruc,
+        //            FacturaO = new FacturasxClientDTO
+        //            {
+        //                FacturaId = cliente.FacturaID
 
+        //            }
+
+        //        return clienteFactDTOs;
+        //    }
+
+        //}
     }
 }

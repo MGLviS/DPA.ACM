@@ -10,5 +10,7 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<bool> Delete(int id);
         Task<bool> UpdateClient(int id, ClienteUpdateDTO clienteDTO);
         Task<IEnumerable<ClienteDTO>> GetByNaApDniRuc(string inputSearch);
+        //Task<IEnumerable<ClienteFactDTO>> GetFactxClient(int idClient);
+
     }
 }

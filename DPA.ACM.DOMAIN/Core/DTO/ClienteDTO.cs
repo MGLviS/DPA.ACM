@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DPA.ACM.DOMAIN.Core.Entities;
 
 namespace DPA.ACM.DOMAIN.Core.DTO
 {
@@ -73,4 +74,15 @@ namespace DPA.ACM.DOMAIN.Core.DTO
         public string? Nombre { get; set; }
         public string? Apellido { get; set; }
     }
+
+    public class ClienteFactDTO
+    {
+        public int ClienteId { get; set; }
+        public string? Nombre { get; set; }
+        public string? Apellido { get; set; }
+        public string? Dni { get; set; }
+        public string? Ruc { get; set; }
+        public FacturasxClientDTO FacturaO { get; set; }
+    }
+
 }
