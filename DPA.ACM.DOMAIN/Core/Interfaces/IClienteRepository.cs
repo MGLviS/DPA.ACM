@@ -11,6 +11,7 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<bool> IsEmailRegistered(string CorreoElectronico);
         Task <Cliente> SignIn(string correoElectronico, string password);
         Task<IEnumerable<Cliente>> GetByNaApDniRuc(string inputSearch);
-        Task<IEnumerable<Cliente>> GetClienteWithFacturas(int idCliente);
+        //Task<IEnumerable<Cliente>> GetClienteWithFacturas(int idCliente);
+        Task<Cliente> GetClienteWithFacturas(int idCliente);
     }
 }

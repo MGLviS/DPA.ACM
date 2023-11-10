@@ -99,13 +99,13 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
 
             return search;
         }
-        public async Task<IEnumerable<Cliente>> GetClienteWithFacturas (int idCliente)
+        public async Task<Cliente> GetClienteWithFacturas (int idCliente)
         {
             var cliente = await _dbContext
                                 .Cliente
                                 .Where(x => x.ClienteId == idCliente)
                                 .Include(z => z.Factura)
-                                .ToListAsync();
+                                .FirstOrDefaultAsync();
             return cliente;
         }
 

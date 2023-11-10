@@ -1,6 +1,8 @@
+using AutoMapper;
 using DPA.ACM.DOMAIN.Core.Interfaces;
 using DPA.ACM.DOMAIN.Core.Services;
 using DPA.ACM.DOMAIN.Infrastructure.Data;
+using DPA.ACM.DOMAIN.Infrastructure.Mapping;
 using DPA.ACM.DOMAIN.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -75,8 +77,17 @@ builder
     .AddTransient<IDetalleInvRepository, DetalleInvRepository>();
 builder.Services.AddTransient<IDetInvService,DetInvService>();
 
+//Add Automapper
+var config = new MapperConfiguration(cfg =>
+{
+    cfg.AddProfile(new AutomapperProfile());
+}
+);
+var mapper = config.CreateMapper();
 
 builder.Services.AddControllers();
+builder.Services.AddSingleton(mapper);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

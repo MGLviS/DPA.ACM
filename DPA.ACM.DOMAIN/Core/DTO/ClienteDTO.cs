@@ -82,7 +82,7 @@ namespace DPA.ACM.DOMAIN.Core.DTO
         public string? Apellido { get; set; }
         public string? Dni { get; set; }
         public string? Ruc { get; set; }
-        public FacturasxClientDTO FacturaO { get; set; }
+        public IEnumerable<FacturasxClientDTO> Factura { get; set; }
     }
 
 }

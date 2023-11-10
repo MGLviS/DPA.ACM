@@ -76,12 +76,14 @@ namespace DPA.ACM.API.Controllers
             return Ok(cliente);
         }
 
-        //[HttpGet("GetFacturasByClient")]
-        //public async Task<ActionResult> GetFacturasByCliente(int idCliente)
-        //{
-        //    var cliente = await _clienteService.GetFactxClient(idCliente);
-        //    return Ok(cliente);
-        //}
+        [HttpGet("GetFacturasByClient")]
+        public async Task<ActionResult> GetFacturasByCliente(int idCliente)
+        {
+            var cliente = await _clienteService.GetFactxClient(idCliente);
+            if (cliente == null)
+                return NotFound();
+            return Ok(cliente);
+        }
 
 
 

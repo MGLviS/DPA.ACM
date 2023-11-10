@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DPA.ACM.DOMAIN.Infrastructure.Repositories;
+using AutoMapper;
 
 namespace DPA.ACM.DOMAIN.Core.Services
 {
@@ -14,10 +15,12 @@ namespace DPA.ACM.DOMAIN.Core.Services
 
     {
         private readonly IClienteRepository _clienteRepository;
+        private readonly IMapper _mapper;
         //private readonly IJWTFactory _jwtFactory;
-        public ClienteService(IClienteRepository clienteRepository)
+        public ClienteService(IClienteRepository clienteRepository, IMapper mapper)
         {
             _clienteRepository = clienteRepository;
+            _mapper = mapper;
             // _jwtFactory = jwtFactory;
         }
         public async Task<IEnumerable<ClienteDTO>> ShowClients()
@@ -145,33 +148,12 @@ namespace DPA.ACM.DOMAIN.Core.Services
             return clienteList;
         }
 
-        //public async Task<IEnumerable<ClienteFactDTO>> GetFactxClient(int idClient)
-        //{
-        //    {
-        //        var cliente = await _clienteRepository.GetClienteWithFacturas(idClient);
+        public async Task<ClienteFactDTO> GetFactxClient(int idClient)
+        {
+            var cliente = await _clienteRepository.GetClienteWithFacturas(idClient);
+            var clientList = _mapper.Map<ClienteFactDTO>(cliente);
+            return clientList;
 
-        //        if (cliente == null)
-        //        {
-        //            return null;
-        //        }
-
-        //        // Mapeo de Cliente y sus facturas a ClienteFactDTO
-        //        var clienteFactDTOs = cliente.Select(cliente => new ClienteFactDTO
-        //        {
-        //            //ClienteId = cliente.,
-        //            Nombre = cliente.Nombre,
-        //            Apellido = cliente.Apellido,
-        //            Dni = cliente.Dni,
-        //            Ruc = cliente.Ruc,
-        //            FacturaO = new FacturasxClientDTO
-        //            {
-        //                FacturaId = cliente.FacturaID
-
-        //            }
-
-        //        return clienteFactDTOs;
-        //    }
-
-        //}
-    }
+        }
+}
 }
