@@ -86,6 +86,16 @@ var config = new MapperConfiguration(cfg =>
 var mapper = config.CreateMapper();
 
 builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+
+    });
+});
 builder.Services.AddSingleton(mapper);
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -102,7 +112,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseAuthorization();
-
+app.UseCors();
 app.MapControllers();
 
 app.Run();
