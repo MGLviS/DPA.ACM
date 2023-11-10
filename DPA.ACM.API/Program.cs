@@ -51,6 +51,12 @@ builder
     .AddTransient<IFacturaRepository, FacturaRepository>();
 builder.Services.AddTransient<IFacturaService, FacturaService>();
 
+//Detalle Factura
+builder
+    .Services
+    .AddTransient<IDetFacturaRepository, DetFacturaRepository>();
+builder.Services.AddTransient<IDetFacturaService, DetFacturaService>();
+
 //Gestion Servicio
 builder
     .Services
