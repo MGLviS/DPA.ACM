@@ -22,21 +22,21 @@ namespace DPA.ACM.DOMAIN.Core.Services
 
         }
 
-        public async Task<IEnumerable<MecanicoDTO>> ShowMecanico()
+        public async Task<IEnumerable<MecanicoListDTO>> ShowMecanico()
         {
             var mecanico = await _mecanicoRepository.GetAll();
             //Convertir mecanico a mecanicoDTO
-            var mecanicoList = new List<MecanicoDTO>();
+            var mecanicoList = new List<MecanicoListDTO>();
             foreach (var item in mecanico)
             {
-                mecanicoList.Add(new MecanicoDTO()
+                mecanicoList.Add(new MecanicoListDTO()
                 {
                     MecanicoId = item.MecanicoId,
                     Nombre = item.Nombre,
                     Apellido = item.Apellido,
                     Telefono = item.Telefono,
                     Especialidad = item.Especialidad,
-                    Taller = item.Taller,
+                    TallerId = item.TallerId,
                     Estado = item.Estado
                 });
             }

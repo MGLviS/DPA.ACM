@@ -12,16 +12,16 @@ namespace DPA.ACM.DOMAIN.Core.Services
 {
     public class PropietarioService : IPropietarioService
     {
-        private readonly IPropietarioRepository _propRespository;
+        private readonly IPropietarioRepository _propRepository;
 
-        public PropietarioService(IPropietarioRepository propRespository)
+        public PropietarioService(IPropietarioRepository propRepository)
         {
-            _propRespository = propRespository;
+            _propRepository = propRepository;
         }
 
         public async Task<bool> RegPropietario(PropRegisterDTO propDTO)
         {
-            var existProp = await _propRespository.IsEmailRegistered(propDTO.CorreoElectronico);
+            var existProp = await _propRepository.IsEmailRegistered(propDTO.CorreoElectronico);
             if (existProp) return false;
 
             var prop = new Propetario()
@@ -36,13 +36,13 @@ namespace DPA.ACM.DOMAIN.Core.Services
                 TallerId = propDTO.TallerId
             };
 
-            var result = await _propRespository.RegPropietario(prop);
+            var result = await _propRepository.RegPropietario(prop);
             return result;
         }
 
         public async Task<bool> Delete(int id)
         {
-            var propietario = await _propRespository.Delete(id);
+            var propietario = await _propRepository.Delete(id);
             if (propietario == false)
                 return false;
             return propietario;
@@ -62,7 +62,7 @@ namespace DPA.ACM.DOMAIN.Core.Services
                 TallerId = propUpdateDTO.TallerId
             };
 
-            var isPropietario = await _propRespository.Update(id, propietario);
+            var isPropietario = await _propRepository.Update(id, propietario);
             if (isPropietario == null)
                 return false;
             return isPropietario;
@@ -70,7 +70,7 @@ namespace DPA.ACM.DOMAIN.Core.Services
 
         public async Task<PropietarioResponseDTO>SignIn(PropietarioAuthDTO propietarioAuthDTO)
         {
-            var propietario = await _propRespository
+            var propietario = await _propRepository
                 .SignIn(propietarioAuthDTO.CorreoElectronico, propietarioAuthDTO.Password);
             if (propietario == null) return null;
 
@@ -86,6 +86,29 @@ namespace DPA.ACM.DOMAIN.Core.Services
                 TallerId = propietario.TallerId
             };
             return propietarioDTO;
+        }
+
+        public async Task<IEnumerable<PropietarioResponseDTO>> ShowPropietario()
+        {
+            var propietario = await _propRepository.GetAll();
+            var propietarioList = new List<PropietarioResponseDTO>();
+            foreach (var item in propietario)
+            {
+                propietarioList.Add(new PropietarioResponseDTO()
+                {
+                    PropietarioId = item.PropietarioId,
+                    Nombre = item.Nombre,
+                    Apellido = item.Apellido,
+                    CorreoElectronico=item.CorreoElectronico,
+                    Telefono = item.Telefono,
+                    Direccion=item.Direccion,
+                    Dni=item.Dni,
+                    Password = item.Password,
+                    TallerId=item.TallerId
+
+                });
+            }
+            return propietarioList;
         }
     }
 }

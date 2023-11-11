@@ -9,7 +9,7 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
 {
     public interface IMecanicoService
     {
-        Task<IEnumerable<MecanicoDTO>> ShowMecanico();
+        Task<IEnumerable<MecanicoListDTO>> ShowMecanico();
 
         Task<bool> CreateMecanico(MecanicoRegisterDTO mecanicoDTO);
 

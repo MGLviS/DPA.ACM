@@ -54,5 +54,12 @@ namespace DPA.ACM.API.Controllers
             var rows = await _propietarioService.Update(id, propietarioUpdateDTO);
             return Ok(rows);
         }
+
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAll()
+        {
+            var propietario = await _propietarioService.ShowPropietario();
+            return Ok(propietario);
+        }
     }
 }
