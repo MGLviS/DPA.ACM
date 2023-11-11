@@ -32,7 +32,7 @@ namespace DPA.ACM.API.Controllers
        }
 
         
-        [HttpDelete("Delete{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Eliminar(int id)
         {
            var result = await _clienteService.Delete(id);
@@ -63,7 +63,7 @@ namespace DPA.ACM.API.Controllers
 
         }
  
-        [HttpPut("Update{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateClient(int id, [FromBody] ClienteUpdateDTO clienteUpdate)
         {
             var rows = await _clienteService.UpdateClient(id, clienteUpdate);
