@@ -47,7 +47,7 @@ namespace DPA.ACM.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("Update/{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> Update(int id, ActualizarVehiculoDTO vehiculo)
         {
             var result = await _vehiculoService.ActualizarVehiculo(id, vehiculo);

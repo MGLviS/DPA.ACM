@@ -41,6 +41,7 @@ namespace DPA.ACM.DOMAIN.Core.Services
             {
                 VehiculoId = item.VehiculoId,
                 Marca = item.Marca,
+                Modelo = item.Modelo,
                 Anio = item.Anio,
                 NumeroPlaca = item.NumeroPlaca,
                 ClienteId= item.ClienteId,

@@ -36,6 +36,7 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
         {
             var busqueda = await _dbcontext.Vehiculo
                 .Where(x => x.VehiculoId == id)
+                //.Where(y => y.ClienteId == id)
                 .Include(z => z.Cliente)
                 .ToListAsync();
             return busqueda;
