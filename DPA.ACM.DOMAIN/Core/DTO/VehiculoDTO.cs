@@ -48,3 +48,4 @@ namespace DPA.ACM.DOMAIN.Core.DTO
         public int? ClienteId { get; set; }
     }
 }
+//vehiculo

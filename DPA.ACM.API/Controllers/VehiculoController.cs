@@ -46,7 +46,7 @@ namespace DPA.ACM.API.Controllers
             var result = await _vehiculoService.EliminarVehiculo(id);
             return Ok(result);
         }
-
+        //PUT
         [HttpPut("Update/{id}")]
         public async Task<IActionResult> Update(int id, ActualizarVehiculoDTO vehiculo)
         {
