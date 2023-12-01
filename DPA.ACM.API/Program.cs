@@ -77,6 +77,12 @@ builder
     .AddTransient<IDetalleInvRepository, DetalleInvRepository>();
 builder.Services.AddTransient<IDetInvService,DetInvService>();
 
+//Reparacion Mantenimiento
+builder
+    .Services
+    .AddTransient<IDetalleMantRepository, DetalleMantRepository>();
+builder.Services.AddTransient<IDetalleMantService, DetalleMantService>();
+
 //Add Automapper
 var config = new MapperConfiguration(cfg =>
 {
