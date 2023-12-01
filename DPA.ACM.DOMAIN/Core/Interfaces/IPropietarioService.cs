@@ -12,6 +12,7 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<bool> Delete(int id);
         Task<bool> Update(int id, PropietarioUpdateDTO propUpdateDTO);
         Task<PropietarioResponseDTO> SignIn(PropietarioAuthDTO propietarioAuthDTO);
+        Task<IEnumerable<PropietarioResponseDTO>> ShowPropietario();
 
     }
 }

@@ -67,6 +67,7 @@ namespace DPA.ACM.DOMAIN.Core.Services
                 Dni = cliente.Dni,
                 Ruc = cliente.Ruc
                 //Token = token
+                //sin token
             };
             return clienteDTO;
 
