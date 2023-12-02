@@ -64,6 +64,13 @@ namespace DPA.ACM.API.Controllers
                 return BadRequest(result);
             return Ok(result);
         }
+
+        [HttpGet("Count")]
+        public async Task<IActionResult> Count()
+        {
+            var result = await _facturaService.GetFacturaReporte();
+            return Ok(result);
+        }
     }
 }
 

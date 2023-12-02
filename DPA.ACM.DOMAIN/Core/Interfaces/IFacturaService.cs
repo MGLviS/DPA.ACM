@@ -11,5 +11,6 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<IEnumerable<FactHistorialDTO>> GetCustom(string inputSearch);
         Task<bool> SetCancelFactura(int id, FactCancelDTO factCancelDTO);
         Task<bool> CreateFactura(FactRegisterDTO factRegisterDTO);
+        Task<IEnumerable<FacturaReporteDTO>> GetFacturaReporte();
     }
 }

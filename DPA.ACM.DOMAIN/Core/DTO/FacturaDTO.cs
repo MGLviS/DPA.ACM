@@ -66,4 +66,10 @@ namespace DPA.ACM.DOMAIN.Core.DTO
 
 
     }
+
+    public class FacturaReporteDTO
+    {
+        public int FacturaId { get; set; }
+        public decimal? Total { get; set; }
+    }
 }

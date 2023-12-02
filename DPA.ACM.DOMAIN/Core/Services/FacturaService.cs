@@ -131,6 +131,25 @@ namespace DPA.ACM.DOMAIN.Core.Services
             var result = await _facturaRepository.RegisterFactura(factura);
             return result;
         }
+
+        public async Task<IEnumerable<FacturaReporteDTO>> GetFacturaReporte()
+        {
+            var factura = await _facturaRepository.GetFactActivas();
+            //Convert factura to FacturaDTO
+            var facturalist = new List<FacturaReporteDTO>();
+            foreach (var item in factura)
+            {
+                facturalist.Add(new FacturaReporteDTO
+                {
+                    FacturaId = item.FacturaId,
+                    Total = item.Total,
+
+                });
+            }
+
+
+            return facturalist;
+        }
     }
 }
 
