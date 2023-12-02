@@ -70,7 +70,32 @@ namespace DPA.ACM.DOMAIN.Infrastructure.Repositories
             var rows = await _dbcontext.SaveChangesAsync();
             return rows > 0;
         }
+
+        public async Task<IEnumerable<ModeloCantidad>> GetCantidadPorMarca()
+        {
+            var vehiculos = await _dbcontext.Vehiculo.ToListAsync();
+
+            // Llamada a la función para obtener la cantidad por modelo
+            var cantidadPorModelo = ObtenerCantidadPorMarca(vehiculos);
+
+            // Puedes usar o devolver la cantidad por modelo según tus necesidades
+            return cantidadPorModelo;
+        }
+
+        private List<ModeloCantidad> ObtenerCantidadPorMarca(List<Vehiculo> vehiculos)
+        {
+            return vehiculos
+                .GroupBy(v => v.Marca)
+                .Select(g => new ModeloCantidad { Marca = g.Key, Cantidad = g.Count() })
+                .ToList();
+        }
     }
+}
+
+public class ModeloCantidad
+{
+    public string Marca { get; set; }
+    public int Cantidad { get; set; }
 }
 
 //vehiculo

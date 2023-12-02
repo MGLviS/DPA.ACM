@@ -2,6 +2,7 @@
 using DPA.ACM.DOMAIN.Core.Entities;
 using DPA.ACM.DOMAIN.Core.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DPA.ACM.API.Controllers
@@ -53,6 +54,12 @@ namespace DPA.ACM.API.Controllers
             var result = await _vehiculoService.ActualizarVehiculo(id, vehiculo);
             return Ok(result);
         }
-       
-    }
+
+        [HttpGet("Count")]
+        public async Task<IActionResult> GetCount()
+        {
+            var result = await _vehiculoService.GetCantidadPorMarca();
+            return Ok(result);
+        }
+}
 }

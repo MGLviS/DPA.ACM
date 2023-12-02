@@ -106,6 +106,13 @@ namespace DPA.ACM.DOMAIN.Core.Services
                 return false;
             return vehiculo;
         }
+
+        public async Task<IEnumerable<ModeloCantidad>> GetCantidadPorMarca()
+        {
+            var resumen = await _vehiculoRepository.GetCantidadPorMarca();
+
+            return resumen;
+        }
     }
 }
 //vehiculo

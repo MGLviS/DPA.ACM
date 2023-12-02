@@ -9,5 +9,7 @@ namespace DPA.ACM.DOMAIN.Core.Interfaces
         Task<IEnumerable<Vehiculo>> GetById(int id);
         Task<bool> Update(int id, Vehiculo vehiculo);
         Task<bool> InsertV(Vehiculo vehiculo);
+
+        Task<IEnumerable<ModeloCantidad>> GetCantidadPorMarca();
     }
-}
+}   
