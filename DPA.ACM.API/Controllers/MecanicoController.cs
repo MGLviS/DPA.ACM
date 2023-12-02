@@ -44,7 +44,7 @@ namespace DPA.ACM.API.Controllers
                   return Ok(mecanico);
               }*/
 
-        [HttpDelete("DeleteMecanico")]
+        [HttpDelete("Delete{id}")]
               public async Task<IActionResult> DeleteMecanico(int id)
               {
                   var result = await _mecanicoService.Delete(id);
