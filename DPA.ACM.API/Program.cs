@@ -83,6 +83,12 @@ builder
     .AddTransient<IDetalleMantRepository, DetalleMantRepository>();
 builder.Services.AddTransient<IDetalleMantService, DetalleMantService>();
 
+//Gestion Programacion
+builder
+    .Services
+    .AddTransient<IProgramacionRepository, ProgramacionRepository>();
+builder.Services.AddTransient<IProgramacionService, ProgramacionService>();
+
 //Add Automapper
 var config = new MapperConfiguration(cfg =>
 {
